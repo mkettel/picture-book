@@ -1,54 +1,69 @@
-import { atom, useAtom } from "jotai";
+import { atom, useAtom } from "jotai"; // atom is a state management library
+import { useEffect } from "react";
 
 const pictures = [
-  "DSC00680",
-  "DSC00933",
-  "DSC00966",
-  "DSC00983",
-  "DSC01011",
-  "DSC01040",
-  "DSC01064",
-  "DSC01071",
-  "DSC01103",
-  "DSC01145",
-  "DSC01420",
-  "DSC01461",
-  "DSC01489",
-  "DSC02031",
-  "DSC02064",
-  "DSC02069",
+  "speak-no-evil",
+  "central-park",
+  "apartment-wall",
+  "apartment-good-light",
+  "Double-Exposure",
+  "sam-roof",
+  "jade-and-juice",
+  "film-costa-sunset",
+  "good-vibes",
+  "Gator",
+  "costa-rican-sunset",
+  "Cornice-2",
+  "drive-view",
+  "mary-dam-rennis",
+  "marcy-start",
+  "Stream-Trees",
+  "marcy-success",
+  "Chillin-by-the-Pool",
+  "dino-bali",
+  "nusa-water",
+  "Mirror-2",
+  "Dad-Scoping",
+  "dad-birds",
+  "joey-pup",
+  "dad-binocs",
 ];
 
 export const pageAtom = atom(0);
 export const pages = [
   {
-    front: "book-cover",
-    back: pictures[0],
+    front: "pxl-cover", // the cover of the book
+    back: pictures[0], // the first page of the book
   },
 ];
 for (let i = 1; i < pictures.length - 1; i += 2) {
   pages.push({
-    front: pictures[i % pictures.length],
-    back: pictures[(i + 1) % pictures.length],
+    front: pictures[i % pictures.length], // the front of the page
+    back: pictures[(i + 1) % pictures.length], // the back of the page
   });
 }
 
 pages.push({
   front: pictures[pictures.length - 1],
-  back: "book-back",
+  back: "pxl-back",
 });
 
 export const UI = () => {
   const [page, setPage] = useAtom(pageAtom);
+
+  useEffect(() => {
+    const audio = new Audio("/audios/page-flip-01a.mp3");
+    audio.play();
+  }, [page]);
 
   return (
     <>
       <main className=" pointer-events-none select-none z-10 fixed  inset-0  flex justify-between flex-col">
         <a
           className="pointer-events-auto mt-10 ml-10"
-          href="https://lessons.wawasensei.dev/courses/react-three-fiber"
+          href="https://www.pxlagency.com/"
         >
-          <img className="w-20" src="/images/wawasensei-white.png" />
+          <img className="w-20" src="/images/Logo_PXL.png" />
         </a>
         <div className="w-full overflow-auto pointer-events-auto flex justify-center">
           <div className="overflow-auto flex items-center gap-4 max-w-full p-10">
@@ -79,29 +94,26 @@ export const UI = () => {
         </div>
       </main>
 
-      <div className="fixed inset-0 flex items-center -rotate-2 select-none">
+      <div className="fixed inset-0 flex items-center -rotate-2 select-none hidden">
         <div className="relative">
           <div className="bg-white/0  animate-horizontal-scroll flex items-center gap-8 w-max px-8">
             <h1 className="shrink-0 text-white text-10xl font-black ">
-              Wawa Sensei
+              PXL
             </h1>
             <h2 className="shrink-0 text-white text-8xl italic font-light">
-              React Three Fiber
+              Creative Agency
             </h2>
             <h2 className="shrink-0 text-white text-12xl font-bold">
-              Three.js
+              Entertainment
             </h2>
             <h2 className="shrink-0 text-transparent text-12xl font-bold italic outline-text">
-              Ultimate Guide
+              Web
             </h2>
             <h2 className="shrink-0 text-white text-9xl font-medium">
-              Tutorials
+              Social
             </h2>
             <h2 className="shrink-0 text-white text-9xl font-extralight italic">
-              Learn
-            </h2>
-            <h2 className="shrink-0 text-white text-13xl font-bold">
-              Practice
+              Activations
             </h2>
             <h2 className="shrink-0 text-transparent text-13xl font-bold outline-text italic">
               Creative
@@ -109,25 +121,22 @@ export const UI = () => {
           </div>
           <div className="absolute top-0 left-0 bg-white/0 animate-horizontal-scroll-2 flex items-center gap-8 px-8 w-max">
             <h1 className="shrink-0 text-white text-10xl font-black ">
-              Wawa Sensei
+              PXL
             </h1>
             <h2 className="shrink-0 text-white text-8xl italic font-light">
-              React Three Fiber
+              Creative Agency
             </h2>
             <h2 className="shrink-0 text-white text-12xl font-bold">
-              Three.js
+              Entertainment
             </h2>
             <h2 className="shrink-0 text-transparent text-12xl font-bold italic outline-text">
-              Ultimate Guide
+              Web
             </h2>
             <h2 className="shrink-0 text-white text-9xl font-medium">
-              Tutorials
+              Social
             </h2>
             <h2 className="shrink-0 text-white text-9xl font-extralight italic">
-              Learn
-            </h2>
-            <h2 className="shrink-0 text-white text-13xl font-bold">
-              Practice
+              Activations
             </h2>
             <h2 className="shrink-0 text-transparent text-13xl font-bold outline-text italic">
               Creative
