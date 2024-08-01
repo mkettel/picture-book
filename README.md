@@ -1,9 +1,9 @@
-# r3f-animated-book-slider-starter
+# MAGIC BOOK
 
-![YouTube Thumbnail](https://github.com/user-attachments/assets/c6b6ea2e-2643-4d53-89b7-ee5b848de06d)
+**All credit to Wawa Sensei for the tutorial and getting this project going.**
 
-[Video tutorial](https://youtu.be/b7a_Y1Ja6js)
+### To clone and run just do: 
 
-[Live demo](https://r3f-animated-book-slider-final.vercel.app/)
+`npm install`
 
-[Final code](https://github.com/wass08/r3f-animated-book-slider-final)
+`npm run dev`
