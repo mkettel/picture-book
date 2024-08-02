@@ -11,7 +11,7 @@ export const Experience = () => {
       >
         <Book />
       </Float>
-      <OrbitControls />
+      <OrbitControls minDistance={4.5} maxDistance={4.5} minAzimuthAngle={-0.3} maxAzimuthAngle={0.3} minPolarAngle={0.9} maxPolarAngle={1.7} />
       <Environment preset="studio" environmentIntensity={0.46}></Environment>
       <directionalLight
         position={[1, 5, 2]}
