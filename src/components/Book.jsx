@@ -311,7 +311,7 @@ export const Book = ({...props}) => {
 
 
     return (
-        <group ref={book} {...props} rotation-y={-Math.PI / 2}
+        <group ref={book} {...props} rotation-y={-Math.PI / 2.0} rotation-x={0.30}
             
         >
             {

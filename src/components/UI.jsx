@@ -3,20 +3,22 @@ import { useEffect } from "react";
 
 const pictures = [
   "speak-no-label",
-  "central-park",
-  "apartment-wall",
-  "apartment-good-light",
-  "sam-roof",
-  "film-costa-sunset",
-  "good-vibes",
-  "Gator",
-  "costa-rican-sunset",
-  "Cornice-2",
-  "drive-view",
-  "Stream-Trees",
-  "dino-bali",
-  "nusa-water",
-  "joey-pup",
+  "fall-guy-slide",
+  "gabby-slide-new",
+  "kfp-slide",
+  // "apartment-wall",
+  // "apartment-good-light",
+  // "sam-roof",
+  // "film-costa-sunset",
+  // "good-vibes",
+  // "Gator",
+  // "costa-rican-sunset",
+  // "Cornice-2",
+  // "drive-view",
+  // "Stream-Trees",
+  // "dino-bali",
+  // "nusa-water",
+  // "joey-pup",
 ];
 
 export const pageAtom = atom(0);
@@ -60,7 +62,7 @@ export const UI = () => {
             {[...pages].map((_, index) => (
               <button
                 key={index}
-                className={`border-transparent hover:border-white transition-all duration-300  px-4 py-3 rounded-full  text-lg uppercase shrink-0 border ${
+                className={`border-transparent hover:border-white transition-all duration-300  px-4 py-3 rounded-lg  text-lg uppercase shrink-0 border ${
                   index === page
                     ? "bg-white/90 text-black"
                     : "bg-black/30 text-white"
@@ -71,7 +73,7 @@ export const UI = () => {
               </button>
             ))}
             <button
-              className={`border-transparent hover:border-white transition-all duration-300  px-4 py-3 rounded-full  text-lg uppercase shrink-0 border ${
+              className={`border-transparent hover:border-white transition-all duration-300  px-4 py-3 rounded-lg  text-lg uppercase shrink-0 border ${
                 page === pages.length
                   ? "bg-white/90 text-black"
                   : "bg-black/30 text-white"

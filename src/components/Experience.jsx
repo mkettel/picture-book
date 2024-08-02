@@ -4,18 +4,18 @@ export const Experience = () => {
   return (
     <>
       <Float 
-        rotation-x={-Math.PI / 4} // tilt the book a bit
+        rotation-x={-Math.PI / 4.0} // tilt the book a bit
         floatIntensity={0.6}
         speed={0.9}
-        rotationIntensity={0.5}
+        rotationIntensity={0.1}
       >
         <Book />
       </Float>
       <OrbitControls />
-      <Environment preset="studio"></Environment>
+      <Environment preset="studio" environmentIntensity={0.46}></Environment>
       <directionalLight
         position={[1, 5, 2]}
-        intensity={2.5}
+        intensity={1.0}
         castShadow
         shadow-mapSize-width={2048}
         shadow-mapSize-height={2048}
