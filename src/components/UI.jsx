@@ -24,7 +24,7 @@ const pictures = [
 export const pageAtom = atom(0);
 export const pages = [
   {
-    front: "pxl-cover", // the cover of the book
+    front: "pxl-cover-2", // the cover of the book
     back: pictures[0], // the first page of the book
   },
 ];
