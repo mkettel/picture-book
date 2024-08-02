@@ -12,10 +12,10 @@ export const Experience = () => {
         <Book />
       </Float>
       <OrbitControls minDistance={4.5} maxDistance={4.5} minAzimuthAngle={-0.3} maxAzimuthAngle={0.3} minPolarAngle={0.9} maxPolarAngle={1.7} />
-      <Environment preset="studio" environmentIntensity={0.46}></Environment>
+      <Environment preset="forest" environmentIntensity={0.46}></Environment>
       <directionalLight
-        position={[1, 5, 2]}
-        intensity={1.0}
+        position={[1, 4, 2]}
+        intensity={1.5}
         castShadow
         shadow-mapSize-width={2048}
         shadow-mapSize-height={2048}
