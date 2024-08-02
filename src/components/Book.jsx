@@ -278,20 +278,35 @@ export const Book = ({...props}) => {
 
     // If the book is open set the position of the book to the left else set it to the right with lerp
     useFrame((_, delta) => {
-        const isBookClosed = page === 0 || page === pages.length
+        const isBookClosed = page === 0
+        const isBookClosedBack = page === pages.length
 
         // Lerp the x position
-        book.current.position.x = MathUtils.lerp(
-            book.current.position.x,
-            isBookClosed ? -1.5 : 0,
-            0.03
-        )
+        if (isBookClosed) {
+            book.current.position.x = MathUtils.lerp(
+                book.current.position.x,
+                -1.5,
+                0.03
+            )
+        } else if (isBookClosedBack) {
+            book.current.position.x = MathUtils.lerp(
+                book.current.position.x,
+                1.5,
+                0.03
+            )
+        } else {
+            book.current.position.x = MathUtils.lerp(
+                book.current.position.x,
+                0,
+                0.03
+            )
+        }
 
         // Lerp the scale
-        const targetScale = isBookClosed ? 1.6 : 1.4
-        book.current.scale.x = MathUtils.lerp(book.current.scale.x, targetScale, 0.03)
-        book.current.scale.y = MathUtils.lerp(book.current.scale.y, targetScale, 0.03)
-        book.current.scale.z = MathUtils.lerp(book.current.scale.z, targetScale, 0.03)
+        const targetScale = isBookClosed ? 1.8 : 1.5
+        book.current.scale.x = MathUtils.lerp(book.current.scale.x, targetScale, 0.02)
+        book.current.scale.y = MathUtils.lerp(book.current.scale.y, targetScale, 0.02)
+        book.current.scale.z = MathUtils.lerp(book.current.scale.z, targetScale, 0.02)
     })
 
 
