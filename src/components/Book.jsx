@@ -8,7 +8,7 @@ import { degToRad } from "three/src/math/MathUtils.js"
 import { useAtom } from "jotai"
 import { easing } from "maath"
 
-const easingFactor = 0.5;
+const easingFactor = 0.6;
 const easingFactorFold = 0.3;
 const insideCurveStrength = 0.18;
 const outsideCurveStrength = 0.05;
@@ -25,11 +25,18 @@ const pageGeometry = new BoxGeometry(PAGE_WIDTH, PAGE_HEIGHT, PAGE_DEPTH, PAGE_S
 
 pageGeometry.translate(PAGE_WIDTH / 2, 0, 0); // move the geometry to the right so the left edge is at 0
 
-const position = pageGeometry.attributes.position 
-const vertex = new Vector3()
-const skinIndexes = []
+const position = pageGeometry.attributes.position // get the position attribute of the pageGeometry
+const vertex = new Vector3() // create a new vector3 to store the vertex position
+const skinIndexes = [] 
 const skinWeights = []
 
+/**
+ * Loop through all the vertices of the pageGeometry
+ * For each vertex get the x position
+ * Calculate the skin index based on the x position (skin index is the bone index which is the bone that the vertex is attached to)
+ * Calculate the skin weight based on the x position (skin weight is the weight of the bone to the vertex)
+ * Push the skin index and skin weight to the skinIndexes and skinWeights arrays 
+ */
 for (let i = 0; i < position.count; i++) {
     // ALL VERTICES 
     vertex.fromBufferAttribute(position, i) // get the vertex position
@@ -71,7 +78,7 @@ const pageMaterials = [
     }),
 ]
 
-// Loader 
+// Loader for the textures of the pages
 pages.forEach((page) => {
     useTexture.preload(`/textures/${page.front}.jpg`)
     useTexture.preload(`/textures/${page.back}.jpg`)
@@ -92,6 +99,17 @@ const Page = ({ number, front, back, page, opened, bookClosed, ...props }) => {
 
     const skinnedMeshRef = useRef()
 
+    /**
+     * For each page and page segment we create a bone and add it to the previous bone
+     * Starting with the first bone at the left edge of the page
+     * The bones are added to the mesh and the skeleton is bound to the mesh
+     * new skeleton is created with the bones and the mesh is created with the skeleton
+     * Then we will create the materials for the pages. 
+     * For the cover and back cover we will use the roughness map
+     * For the other pages we will use the roughness value of 0.2 to give a bit of roughness to the pages 
+     * Then we create the mesh with the geometry and the materials added to it
+     * 
+     */
     const manualSkinnedMesh = useMemo(() => {
         const bones = []
         for (let i = 0; i <= PAGE_SEGMENTS; i++) {
@@ -121,7 +139,7 @@ const Page = ({ number, front, back, page, opened, bookClosed, ...props }) => {
                     }
                 ),
                 emissive: emmisiveColor,
-                emissiveIntensity: 0,
+                emissiveIntensity: 0, 
             }),
             new MeshStandardMaterial({
                 color: whiteColor, 
@@ -135,7 +153,7 @@ const Page = ({ number, front, back, page, opened, bookClosed, ...props }) => {
                     }
                 ),
                 emissive: emmisiveColor,
-                emissiveIntensity: 0,
+                emissiveIntensity: 0, 
             })
         ];
         const mesh = new SkinnedMesh(pageGeometry, materials);
@@ -149,12 +167,16 @@ const Page = ({ number, front, back, page, opened, bookClosed, ...props }) => {
 
     // useHelper(skinnedMeshRef, SkeletonHelper, 'cyan')
 
+    /**
+     * This will be the animation for the page
+     * If the skinnedMeshRef is not null then we will animate the page
+     */
     useFrame((_, delta) => {
         if (!skinnedMeshRef.current) {
             return;
         }
 
-        const emissiveIntensity = highlighted ? 0.01 : 0;
+        const emissiveIntensity = highlighted ? 0.02 : 0;
         skinnedMeshRef.current.material[4].emissiveIntensity = skinnedMeshRef.current.material[5].emissiveIntensity = MathUtils.lerp(
             skinnedMeshRef.current.material[4].emissiveIntensity,
             emissiveIntensity,
@@ -163,6 +185,7 @@ const Page = ({ number, front, back, page, opened, bookClosed, ...props }) => {
 
         /**
          * If the last opened page is not the current opened page then set the turnedAt to the current date
+         * and set the lastOpened to the current opened page
          */
         if (lastOpened.current !== opened) {
             turnedAt.current = +new Date(); 
