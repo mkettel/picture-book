@@ -20,6 +20,7 @@ const pictures = [
   // "nusa-water",
   // "joey-pup",
 ];
+// add
 
 export const pageAtom = atom(0);
 export const pages = [
